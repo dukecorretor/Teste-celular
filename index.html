@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Eu te amo ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="scene">
+    <div class="hearts" aria-hidden="true"></div>
+    <main class="card" role="main">
+      <h1>EU TE AMO</h1>
+      <h2>mais do que palavras podem dizer</h2>
+      <p class="lead">Meu amor, a cada batida do meu coração eu penso em você. Você é minha luz, meu abraço e meu lar. Quero te encher de carinho, risos e lembranças eternas.</p>
+      <button id="surpresa" class="btn">Toque aqui ❤️</button>
+      <div id="mensagem" class="hidden">
+        <p>Quero passar todos os amanheceres e noites ao seu lado. Obrigado por ser você — perfeita, louca, gentil e linda. Te amo hoje, amanhã e sempre.</p>
+      </div>
+
+      <div id="overlay" class="overlay hidden" aria-hidden="true">
+        <div class="overlay-card">
+          <h1>EU TE AMO</h1>
+        </div>
+      </div>
+    </main>
+    <footer class="credits">Para você, com todo o meu amor 💖</footer>
+  </div>
+
+  <script>
+    // Toggle mensagem surpresa + overlay
+    const btn = document.getElementById('surpresa');
+    btn.addEventListener('click', function(){
+      const el = document.getElementById('mensagem');
+      const overlay = document.getElementById('overlay');
+      // mostrar mensagem inline
+      el.classList.toggle('hidden');
+      // mostrar overlay grande por alguns segundos
+      overlay.classList.remove('hidden');
+      overlay.setAttribute('aria-hidden','false');
+      // anima o overlay (CSS) e auto-hide após 4.5s
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+        overlay.setAttribute('aria-hidden','true');
+      }, 4500);
+      // atualizar texto do botão
+      this.textContent = el.classList.contains('hidden') ? 'Toque aqui ❤️' : 'Esconder';
+    });
+
+    // Criar corações flutuantes
+    const heartsContainer = document.querySelector('.hearts');
+    const colors = ['#ff6b81','#ff9aa2','#ffb3c1','#ffd6e0','#ff7ab6'];
+    function createHeart(){
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      const size = Math.random()*30 + 20;
+      heart.style.width = size + 'px';
+      heart.style.height = size + 'px';
+      heart.style.left = Math.random()*100 + '%';
+      heart.style.background = colors[Math.floor(Math.random()*colors.length)];
+      heart.style.opacity = (Math.random()*0.5 + 0.5).toFixed(2);
+      heartsContainer.appendChild(heart);
+      setTimeout(()=> heart.remove(), 5000 + Math.random()*3000);
+    }
+    setInterval(createHeart, 400);
+  </script>
+</body>
+</html>
